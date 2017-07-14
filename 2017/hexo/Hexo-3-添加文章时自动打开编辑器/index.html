@@ -95,7 +95,7 @@
 <meta property="og:url" content="https://xrdcrab.github.io/2017/hexo/Hexo-3-添加文章时自动打开编辑器/index.html">
 <meta property="og:site_name" content="Ruida's Notes">
 <meta property="og:description" content="本文介绍了Hexo的使用技巧——如何在新建文章的同时打开Markdown编辑器">
-<meta property="og:updated_time" content="2017-07-14T18:34:52.000Z">
+<meta property="og:updated_time" content="2017-07-14T19:08:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo 3 添加文章时自动打开编辑器">
 <meta name="twitter:description" content="本文介绍了Hexo的使用技巧——如何在新建文章的同时打开Markdown编辑器">
@@ -413,12 +413,12 @@
 <p><a href="https://notes.wanghao.work/2015-06-29-Hexo添加文章时自动打开编辑器.html" target="_blank" rel="external">wanghao大神</a>的方法并不能在博主的机器上成功运行，我做了一些修改，终于在自己的电脑上成功了！</p>
 <p>方法如下：</p>
 <ol>
-<li>首先在Hexo 的根目录的<code>scripts</code>目录下新建一个Javascript 文件。（如果<code>scripts</code>不存在则新建该目录。</li>
-<li>js文件可以任意命名</li>
-<li>将如下内容写入脚本（针对Mac用户）</li>
+<li>首先在Hexo 的根目录的<code>scripts</code>目录下（如果<code>scripts</code>不存在则新建该目录）新建一个Javascript 文件，该文件可以任意命名。</li>
+<li><p>将如下内容写入脚本（针对Mac用户）</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> exec = <span class="built_in">require</span>(<span class="string">'child_process'</span>).exec;</div><div class="line"></div><div class="line">hexo.on(<span class="string">'new'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">	<span class="comment">// 请将 MWeb 替换为你用的Markdown 编辑器</span></div><div class="line">	exec(<span class="string">'open -a "MWeb.app" '</span> + data.path);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
 </ol>
-<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> exec = <span class="built_in">require</span>(<span class="string">'child_process'</span>).exec;</div><div class="line"></div><div class="line">hexo.on(<span class="string">'new'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">	<span class="comment">// 请将 MWeb 替换为你用的Markdown 编辑器</span></div><div class="line">	exec(<span class="string">'open -a "MWeb.app" '</span> + data.path);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</code></pre><ol>
+<ol>
 <li>保存并退出之后，在<code>Terminal</code> 输入 <code>hexo new “test auto run editor”</code></li>
 </ol>
 <p>是不是成功打开了新建的文档？开始写作吧！</p>
