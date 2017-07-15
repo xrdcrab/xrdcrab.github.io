@@ -89,25 +89,16 @@
 
 
 
-<meta name="description" content="##动态规划是什么？
-动态规划是对于 某一类问题 的解决方法，重点在于如何鉴定某一类问题是动态规划可以解决的。
-
-计算机的本质是一个状态机，内存里存储的所有数据构成了当前的状态，CPU只能利用当前的状态计算出下一个状态（不要纠结硬盘之类的外部存储，就算考虑他们也只是扩大了状态的存储容量而已，并不能改变下一个状态只能从当前状态计算出来这一条铁律）当你企图使用计算机解决一个问题是，其实就是在思考如何将">
+<meta name="description" content="学习动态规划过程中的一点思考，关于：1. 动态规划的定义和意义；2. 递推，贪心，搜索，动态规划之间的区别；3. 状态和状态转移方程；4. 最优子结构和无后效性；5. 一些例题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动态规划总结之：动态规划学习笔记">
+<meta property="og:title" content="动态规划总结之：动态规划学习笔记（1）">
 <meta property="og:url" content="https://xrdcrab.github.io/2017/Dynamic-Programming/动态规划总结之：动态规划的定义和意义/index.html">
 <meta property="og:site_name" content="Ruida's Notes">
-<meta property="og:description" content="##动态规划是什么？
-动态规划是对于 某一类问题 的解决方法，重点在于如何鉴定某一类问题是动态规划可以解决的。
-
-计算机的本质是一个状态机，内存里存储的所有数据构成了当前的状态，CPU只能利用当前的状态计算出下一个状态（不要纠结硬盘之类的外部存储，就算考虑他们也只是扩大了状态的存储容量而已，并不能改变下一个状态只能从当前状态计算出来这一条铁律）当你企图使用计算机解决一个问题是，其实就是在思考如何将">
-<meta property="og:updated_time" content="2017-07-15T22:02:21.000Z">
+<meta property="og:description" content="学习动态规划过程中的一点思考，关于：1. 动态规划的定义和意义；2. 递推，贪心，搜索，动态规划之间的区别；3. 状态和状态转移方程；4. 最优子结构和无后效性；5. 一些例题">
+<meta property="og:updated_time" content="2017-07-15T22:21:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="动态规划总结之：动态规划学习笔记">
-<meta name="twitter:description" content="##动态规划是什么？
-动态规划是对于 某一类问题 的解决方法，重点在于如何鉴定某一类问题是动态规划可以解决的。
-
-计算机的本质是一个状态机，内存里存储的所有数据构成了当前的状态，CPU只能利用当前的状态计算出下一个状态（不要纠结硬盘之类的外部存储，就算考虑他们也只是扩大了状态的存储容量而已，并不能改变下一个状态只能从当前状态计算出来这一条铁律）当你企图使用计算机解决一个问题是，其实就是在思考如何将">
+<meta name="twitter:title" content="动态规划总结之：动态规划学习笔记（1）">
+<meta name="twitter:description" content="学习动态规划过程中的一点思考，关于：1. 动态规划的定义和意义；2. 递推，贪心，搜索，动态规划之间的区别；3. 状态和状态转移方程；4. 最优子结构和无后效性；5. 一些例题">
 
 
 
@@ -141,7 +132,7 @@
 
 
 
-  <title> 动态规划总结之：动态规划学习笔记 | Ruida's Notes </title>
+  <title> 动态规划总结之：动态规划学习笔记（1） | Ruida's Notes </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -319,7 +310,7 @@
             
             
               
-                动态规划总结之：动态规划学习笔记
+                动态规划总结之：动态规划学习笔记（1）
               
             
           </h1>
@@ -385,7 +376,7 @@
 
           
           
-             <span id="/2017/Dynamic-Programming/动态规划总结之：动态规划的定义和意义/" class="leancloud_visitors" data-flag-title="动态规划总结之：动态规划学习笔记">
+             <span id="/2017/Dynamic-Programming/动态规划总结之：动态规划的定义和意义/" class="leancloud_visitors" data-flag-title="动态规划总结之：动态规划学习笔记（1）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -402,6 +393,10 @@
           
 
           
+              <div class="post-description">
+                  学习动态规划过程中的一点思考，关于：1. 动态规划的定义和意义；2. 递推，贪心，搜索，动态规划之间的区别；3. 状态和状态转移方程；4. 最优子结构和无后效性；5. 一些例题
+              </div>
+          
 
         </div>
       </header>
@@ -414,13 +409,11 @@
       
 
       
-        <p>##动态规划是什么？</p>
-<p>动态规划是对于 <strong>某一类问题</strong> 的解决方法，重点在于如何鉴定<strong>某一类问题</strong>是动态规划可以解决的。</p>
+        <h2 id="动态规划是什么？"><a href="#动态规划是什么？" class="headerlink" title="动态规划是什么？"></a>动态规划是什么？</h2><p>动态规划是对于 <strong>某一类问题</strong> 的解决方法，重点在于如何鉴定<strong>某一类问题</strong>是动态规划可以解决的。</p>
 <blockquote>
 <p>计算机的本质是一个状态机，内存里存储的所有数据构成了当前的状态，CPU只能利用当前的状态计算出下一个状态（不要纠结硬盘之类的外部存储，就算考虑他们也只是扩大了状态的存储容量而已，并不能改变下一个状态只能从当前状态计算出来这一条铁律）当你企图使用计算机解决一个问题是，其实就是在思考如何将这个问题表达成状态（用哪些变量存储哪些数据）以及如何在状态中转移（怎样根据一些变量计算出另一些变量）。所以所谓的空间复杂度就是为了支持你的计算所必需存储的状态最多有多少，所谓时间复杂度就是从初始状态到达最终状态中间需要多少步！</p>
 </blockquote>
-<p>###递推，贪心，搜索，动态规划</p>
-<p>问题有线性的和非线形的，比如求斐波那契数列第n项就是一个线形的问题，不需要考虑是不是需要更多的状态，也不需要选择哪些旧状态来计算新状态。对于这样的解法，我们叫<strong>递推</strong>。</p>
+<h3 id="递推，贪心，搜索，动态规划"><a href="#递推，贪心，搜索，动态规划" class="headerlink" title="递推，贪心，搜索，动态规划"></a>递推，贪心，搜索，动态规划</h3><p>问题有线性的和非线形的，比如求斐波那契数列第n项就是一个线形的问题，不需要考虑是不是需要更多的状态，也不需要选择哪些旧状态来计算新状态。对于这样的解法，我们叫<strong>递推</strong>。</p>
 <p>想象另外一个非线形问题的情景，假如把你放在一个围棋棋盘上的某一点，你每一步只能走一格，因为你可以东南西北随便走，所以你当你同样走四步可能会处于很多个不同的位置。从头开始走了几步就是第几个阶段，走了n步可能处于的位置称为一个状态，走了这n步所有可能到达的位置的集合就是这个阶段下所有可能的状态。</p>
 <p>假如问题有n个阶段，每个阶段都有多个状态，不同阶段的状态数不必相同，一个阶段的一个状态可以得到下个阶段的所有状态中的几个。那我们要计算出<strong>最终阶段的状态数自然要经历之前每个阶段的某些状态</strong>。</p>
 <p>很多情况下我们并不需要计算出所有状态，因为”<strong>下一步的最优是从当前最优得到的</strong>“。所以为了计算最终的最优值，只需要存储每一步的最优值即可，解决符合这种性质的问题的算法就叫<strong>贪心</strong>。</p>
@@ -437,14 +430,12 @@
 <li>每个阶段的最优状态是由之前所有阶段的状态的组合得到的-&gt;搜索；</li>
 <li>每个阶段的最优状态可以从之前某个阶段的某个或某些状态直接得到而不管之前这个状态是如何得到的-&gt;动态规划。</li>
 </ul>
-<p>###状态和状态转移方程</p>
-<blockquote>
+<h3 id="状态和状态转移方程"><a href="#状态和状态转移方程" class="headerlink" title="状态和状态转移方程"></a>状态和状态转移方程</h3><blockquote>
 <p>动态规划是通过<strong>拆分问题</strong>，定义问题状态和状态之间的关系，使得问题能够以递推（或者说分治）的方式去解决。<br>如何<strong>拆分问题</strong>，是动态规划的核心。而拆分问题，靠的就是<strong>状态的定义和状态转移方程的定义</strong>。</p>
 </blockquote>
 <p><strong>我的理解</strong>：状态就是中间态，就是该问题的子问题的解。将问题重新定义之后找到的一个general state。这个状态，F，可以推出最后的结果，也包含前面所有子问题。</p>
 <p>而状态定义好之后，状态和状态之间的关系式，就叫做<strong>状态转移方程</strong>。</p>
-<p>###最优子结构，无后效性</p>
-<blockquote>
+<h3 id="最优子结构，无后效性"><a href="#最优子结构，无后效性" class="headerlink" title="最优子结构，无后效性"></a>最优子结构，无后效性</h3><blockquote>
 <p>每个阶段的最优状态可以从之前某个阶段的某个或某些状态直接得到</p>
 </blockquote>
 <p>这个性质叫做最优子结构。</p>
@@ -458,22 +449,20 @@
 <p>这个令人不开心的情况就叫做有后效性。</p>
 <p>符合无后效性的状态定义，我们可以说它具有“最优子结构”的性质，在动态规划中我们要做的，就是找到这种“最优子结构”。在对状态和状态转移方程的定义过程中，满足“最优子结构”是一个隐含的条件（否则根本定义不出来）。<br>需要注意的是，一个问题可能有多种不同的状态定义和状态转移方程定义，<strong>存在一个有后效性的定义，不代表该问题不适用动态规划</strong>。动态规划方法要寻找符合“最优子结构“的状态和状态转移方程的定义，在找到之后，这个问题就可以以“记忆化地求解递推式”的方法来解决。而寻找到的定义，才是动态规划的本质。</p>
 <p>其实动态规划中的最优状态的说法容易产生误导，以为只需要计算最优状态就好，LIS问题确实如此，转移时只用到了每个阶段“选”的状态。但实际上有的问题往往需要对每个阶段的所有状态都算出一个最优值，然后根据这些最优值再来找最优状态。比如背包问题就需要对前i个包（阶段）容量为j时（状态）计算出最大价值。然后在最后一个阶段中的所有状态种找到最优值。</p>
-<p>##用例子来分析动态规划问题</p>
-<p>###入门问题</p>
-<blockquote>
+<h2 id="用例子来分析动态规划问题"><a href="#用例子来分析动态规划问题" class="headerlink" title="用例子来分析动态规划问题"></a>用例子来分析动态规划问题</h2><h3 id="入门问题"><a href="#入门问题" class="headerlink" title="入门问题"></a>入门问题</h3><blockquote>
 <p>Given a list of <strong>N coins</strong>, their values (V1, V2, … , VN), and the total <strong>sum S</strong>. Find the minimum number of coins the sum of which is S (we can use as many coins of one type as we want), or report that it’s not possible to select coins in such a way that they sum up to S. (表面上这道题可以用贪心算法，但贪心算法无法保证可以求出解，比如1元换成2元的时候)</p>
 </blockquote>
 <p>d(i)表示凑够i元需要的最少硬币数量，我们将它定义为该问题的”状态”。A smaller state than state i would be the solution for any sum j, where j&lt;i. For finding a state i, we need to first find all smaller states j (j&lt;i).<br>For each coin j, Vj 表示硬币的面值，Vj &lt; i, 寻找 the minimum number of coins found for the i-Vj sum(we have already found it previously)，设这个数量为m 如果 m + 1 <strong>less than the minimum number of coins already found for current sum i</strong>,，那么rewrite the new value。</p>
 <p>DP 方程：<code>d(i) = min{d(i-Vj) + 1} (i-Vj &gt;= 0)</code></p>
 <p>Pseudocode:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Set Min[i] equal to Infinity <span class="keyword">for</span> all of i</div><div class="line">Min[<span class="number">0</span>] = <span class="number">0</span></div><div class="line"></div><div class="line">For i from <span class="number">1</span> to S</div><div class="line">For j from <span class="number">0</span> to N-<span class="number">1</span></div><div class="line">	<span class="keyword">if</span>(Vj &lt;= i &amp;&amp; Min[i-Vj] + <span class="number">1</span> &lt; Min[i])</div><div class="line">		Min[i] = Min[i-Vj]+<span class="number">1</span></div><div class="line"></div><div class="line">Output Min[i]</div></pre></td></tr></table></figure>
-<p>###初级问题<br>Longest Increasing Subsequence</p>
+<h3 id="初级问题"><a href="#初级问题" class="headerlink" title="初级问题"></a>初级问题</h3><p>Longest Increasing Subsequence</p>
 <blockquote>
 <p>我们考虑求A[1],A[2],…,A[i]的最长非降子序列的长度，其中i&lt;N， 那么上面的问题变成了原问题的一个子问题(问题规模变小了，你可以让i=1,2,3等来分析) 然后我们定义d(i)，表示前i个数中以A[i]结尾的最长非降子序列的长度。OK， 对照“入门”中的简单题，你应该可以估计到这个d(i)就是我们要找的状态。 如果我们把d(1)到d(N)都计算出来，那么最终我们要找的答案就是这里面最大的那个。 状态找到了，下一步找出状态转移方程。</p>
 </blockquote>
 <p><code>d(i) = Max{d(j)+1} j&lt;i &amp;&amp; A[j]&lt;=A[i]</code></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lis</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span>[] temp = <span class="keyword">new</span> <span class="keyword">int</span>[n];</div><div class="line">	<span class="keyword">int</span> len = <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</div><div class="line">		temp[i] = <span class="number">1</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</div><div class="line">			<span class="keyword">if</span>(A[i] &gt;= A[j] &amp;&amp; temp[i] &lt; temp[j]+<span class="number">1</span>)&#123;</div><div class="line">				temp[i] = temp[j]+<span class="number">1</span>;</div><div class="line">			&#125;</div><div class="line">		<span class="keyword">if</span>(temp[i] &gt; len) len = temp[i];</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> len;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>###中级问题<br>二维DP</p>
+<h3 id="中级问题"><a href="#中级问题" class="headerlink" title="中级问题"></a>中级问题</h3><p>二维DP</p>
 <blockquote>
 <p>平面上有N*M个格子，每个格子中放着一定数量的苹果。你从左上角的格子开始， 每一步只能向下走或是向右走，每次走到一个格子上就把格子里的苹果收集起来， 这样下去，你最多能收集到多少个苹果。</p>
 </blockquote>
@@ -485,7 +474,7 @@
 <p>S[i][j]有两种计算方式：1.对于每一行，从左向右计算，然后从上到下逐行处理；2. 对于每一列，从上到下计算，然后从左向右逐列处理。 这样做的目的是为了在计算S[i][j]时，S[i-1][j]和S[i][j-1]都已经计算出来了。</p>
 <p>伪代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">For i from <span class="number">0</span> to N-<span class="number">1</span></div><div class="line">	For j from <span class="number">0</span> to M-<span class="number">1</span></div><div class="line">		S[i][j] = A[i][j] + Max(S[i][j-<span class="number">1</span>], <span class="keyword">if</span> j&gt;<span class="number">0</span>; S[i-<span class="number">1</span>][j], <span class="keyword">if</span> i&gt;<span class="number">0</span>; <span class="number">0</span>)</div><div class="line"><span class="keyword">return</span> S[N-<span class="number">1</span>][M-<span class="number">1</span>]</div></pre></td></tr></table></figure>
-<p>###中高级问题<br>带有额外条件的DP问题。</p>
+<h3 id="中高级问题"><a href="#中高级问题" class="headerlink" title="中高级问题"></a>中高级问题</h3><p>带有额外条件的DP问题。</p>
 <blockquote>
 <p>无向图G有N个结点，它的边上带有正的权重值。</p>
 <p>你从结点1开始走，并且一开始的时候你身上带有M元钱。如果你经过结点i，那么你就要花掉S[i]元(可以把这想象为收过路费)。如果你没有足够的钱，就不能从那个结点经过。在这样的限制条件下，找到从结点1到结点N的最短路径。或者输出该路径不存在。如果存在多条最短路径，那么输出花钱数量最少的那条。 限制：1&lt;N&lt;=100 ; 0&lt;=M&lt;=100 ; 对于每个i，0&lt;=S[i]&lt;=100；</p>
@@ -495,7 +484,7 @@
 <p>在每一步中，对于已经找到的最短路径，我们找到它所能到达的下一个未标记状态(i,j)， 将它标记为已访问(之后不再访问这个结点)，并且在能到达这个结点的各个最短路径中，找到加上当前边权重值后最小值对应的路径，即为该结点的最短路径。</p>
 <p>不断重复上面的步骤， 直到所有的结点都访问到为止(这里的访问并不是要求我们要经过它， 比如有个结点收费很高，你没有足够的钱去经过它，但你已经访问过它) 最后Min[N-1][j]中的最小值即是问题的答案(如果有多个最小值，即有多条最短路径，那么选择j最大的那条路径，即，使你剩余钱数最多的最短路径)。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function">Set <span class="title">states</span><span class="params">(i,j)</span> as unvisited <span class="keyword">for</span> <span class="title">all</span> <span class="params">(i,j)</span></span></div><div class="line">Set Min[i][j] to Infinity <span class="keyword">for</span> <span class="title">all</span> <span class="params">(i,j)</span></div><div class="line"></div><div class="line">Min[0][M] = <span class="number">0</span></div><div class="line"></div><div class="line"><span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">	<span class="comment">// Among all unvisited states(i,j) find the one for which Min[i][j] is the smallest. Let this state found be (k,l).</span></div><div class="line"></div><div class="line"><span class="comment">// If there wasn't found any state (k,l) for which Min[k][l] is less than Infinity - exit While loop.</span></div><div class="line"></div><div class="line"><span class="comment">// Mark state(k,l) as visited</span></div><div class="line">	<span class="function">For All Neighbors p of Vertex k</span></div><div class="line">		<span class="title">if</span><span class="params">(l - S[p]&gt;=<span class="number">0</span> &amp;&amp; Min[p][l-S[p]]&gt;Min[k][l]+Dist[k][p])</span></div><div class="line">			Min[p][l-S[p]]=Min[k][l]+Dist[k][p]</div><div class="line">	</div><div class="line">	<span class="comment">/* If for state(i,j) there are enough money left for going to vertex p, (l-S[p] represents the money that will remain after passing to vertex p), and the shortest path found for state(p,l-S[p]) is bigger than [the shortest path found for state(k,l)] + [distance from vertex k to vertex p)], then set the shortest path for state(i,j) to be equal to this sum. */</span></div><div class="line">	End For</div><div class="line"></div><div class="line">End While</div><div class="line"></div><div class="line"><span class="comment">/* Find the smallest number among Min[N-1][j] (for all j, 0&lt;=j&lt;=M); if there are more than one such states, then take the one with greater j. If there are no states(N-1,j) with value less than Infinity - then such a path doesn't exist. */</span></div></pre></td></tr></table></figure>
-<p>###高级问题<br>需要仔细的揣摩才能将其规约为可用DP解的问题。</p>
+<h3 id="高级问题"><a href="#高级问题" class="headerlink" title="高级问题"></a>高级问题</h3><p>需要仔细的揣摩才能将其规约为可用DP解的问题。</p>
 <blockquote>
 <p>给定一个M行N列的矩阵(M*N个格子)，每个格子中放着一定数量的苹果。 你从左上角的格子开始，只能向下或向右走，目的地是右下角的格子。 你每走过一个格子，就把格子上的苹果都收集起来。然后你从右下角走回左上角的格子， 每次只能向左或是向上走，同样的，走过一个格子就把里面的苹果都收集起来。 最后，你再一次从左上角走到右下角，每过一个格子同样要收集起里面的苹果 (如果格子里的苹果数为0，就不用收集)。求你最多能收集到多少苹果。</p>
 <p>注意：当你经过一个格子时，你要一次性把格子里的苹果都拿走。</p>
@@ -606,8 +595,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -680,6 +678,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#动态规划是什么？"><span class="nav-number">1.</span> <span class="nav-text">动态规划是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#递推，贪心，搜索，动态规划"><span class="nav-number">1.1.</span> <span class="nav-text">递推，贪心，搜索，动态规划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态和状态转移方程"><span class="nav-number">1.2.</span> <span class="nav-text">状态和状态转移方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最优子结构，无后效性"><span class="nav-number">1.3.</span> <span class="nav-text">最优子结构，无后效性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用例子来分析动态规划问题"><span class="nav-number">2.</span> <span class="nav-text">用例子来分析动态规划问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#入门问题"><span class="nav-number">2.1.</span> <span class="nav-text">入门问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初级问题"><span class="nav-number">2.2.</span> <span class="nav-text">初级问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中级问题"><span class="nav-number">2.3.</span> <span class="nav-text">中级问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中高级问题"><span class="nav-number">2.4.</span> <span class="nav-text">中高级问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级问题"><span class="nav-number">2.5.</span> <span class="nav-text">高级问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -825,7 +839,7 @@
         var disqus_config = function () {
           this.page.url = 'https://xrdcrab.github.io/2017/Dynamic-Programming/动态规划总结之：动态规划的定义和意义/';
           this.page.identifier = '2017/Dynamic-Programming/动态规划总结之：动态规划的定义和意义/';
-          this.page.title = '动态规划总结之：动态规划学习笔记';
+          this.page.title = '动态规划总结之：动态规划学习笔记（1）';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://xrdnotes.disqus.com/embed.js';
