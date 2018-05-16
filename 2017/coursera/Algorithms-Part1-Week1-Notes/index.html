@@ -1,0 +1,1077 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="brMYyT1TsoXjE82bi8Fh_yrR_q9QnAfxQnOM0zRoBYQ" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="algorithms" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Lecture notes of Princeton Algorithms Part 1 Week 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Algorithms Part1 Week1 Notes">
+<meta property="og:url" content="https://xrdcrab.github.io/2017/coursera/Algorithms-Part1-Week1-Notes/index.html">
+<meta property="og:site_name" content="Ruida's Notes">
+<meta property="og:description" content="Lecture notes of Princeton Algorithms Part 1 Week 1">
+<meta property="og:updated_time" content="2017-09-07T04:14:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Algorithms Part1 Week1 Notes">
+<meta name="twitter:description" content="Lecture notes of Princeton Algorithms Part 1 Week 1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'AF5N0VB0PG',
+      apiKey: '8dc82519314faeb29c0ef79e4c7c386e',
+      indexName: 'blog_notes',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xrdcrab.github.io/2017/coursera/Algorithms-Part1-Week1-Notes/"/>
+
+
+
+
+
+  <title> Algorithms Part1 Week1 Notes | Ruida's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ruida's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Keep moving. Don't settle.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xrdcrab.github.io/2017/coursera/Algorithms-Part1-Week1-Notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruida">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruida's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Algorithms Part1 Week1 Notes
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-21T15:58:47-06:00">
+                2017-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/coursera/" itemprop="url" rel="index">
+                    <span itemprop="name">coursera</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/coursera/Algorithms-Part1-Week1-Notes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/coursera/Algorithms-Part1-Week1-Notes/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/coursera/Algorithms-Part1-Week1-Notes/" class="leancloud_visitors" data-flag-title="Algorithms Part1 Week1 Notes">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  Lecture notes of Princeton Algorithms Part 1 Week 1
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Steps-to-developing-a-usable-algorithm"><a href="#Steps-to-developing-a-usable-algorithm" class="headerlink" title="Steps to developing a usable algorithm"></a>Steps to developing a usable algorithm</h2><ol>
+<li>Model the problem</li>
+<li>Find algorithm</li>
+<li>Fast enough? Fits in memory?</li>
+<li>If not, find a way to address the problem</li>
+<li>Iterate until satisfied</li>
+</ol>
+<h2 id="Union-Find"><a href="#Union-Find" class="headerlink" title="Union Find"></a>Union Find</h2><h3 id="Modeling-the-connections"><a href="#Modeling-the-connections" class="headerlink" title="Modeling the connections"></a>Modeling the connections</h3><ol>
+<li>reflexive, symmetric, ransitive</li>
+<li>Connected components represent object connective</li>
+<li>Find query: check if two obj are in the same connected components</li>
+<li>Union command: replace components containing two objs with theire union</li>
+</ol>
+<h3 id="U-F-data-type"><a href="#U-F-data-type" class="headerlink" title="U-F data type"></a>U-F data type</h3><blockquote>
+<p>UF(int N) — constructer;<br>void union(int p, int q);<br>boolean connected(int p, intq);</p>
+</blockquote>
+<h3 id="Quick-Find-eager-approach"><a href="#Quick-Find-eager-approach" class="headerlink" title="Quick Find (eager approach)"></a>Quick Find (eager approach)</h3><p>use array id[], size N, store id to determine if they are connected. if id[p]==id[q] return ture.</p>
+<p>union(p,q) change id[p] and all those id[]==id[p] to id[q].</p>
+<p>initialize : O(N);<br>union : O(N);<br>find : O(1);</p>
+<p>problem : N union commands and N objects, union could be N^2. <strong>Quadratic</strong>! Too slow for huge problems.</p>
+<blockquote>
+<p>Quadratic algorithms do not scale<br>mans: 10 times fast computer, 10 times slow</p>
+</blockquote>
+<h3 id="Quick-Union-lazy-approach"><a href="#Quick-Union-lazy-approach" class="headerlink" title="Quick Union (lazy approach)"></a>Quick Union (lazy approach)</h3><p>use array id[], size N, store its parent, like a tree. id[i] is index of parent of i. root of i is id[…id[i]…], keep going until i == id[i]. if two objs have the same root, they are connected.</p>
+<p>union(p,q) change root of p to q’s root. use while loop to find the root.</p>
+<p>initialize : O(N);<br>union : O(N);<br>find : O(N); worst case</p>
+<h3 id="Quick-Union-Improvements"><a href="#Quick-Union-Improvements" class="headerlink" title="Quick Union Improvements"></a>Quick Union Improvements</h3><h4 id="weighting"><a href="#weighting" class="headerlink" title="weighting"></a>weighting</h4><p>put smaller tree under larger tree. Linking root of smaller tree to root of larger tree.</p>
+<p>maintain extra array sz[i] to count number of objects in the tree <strong>rooted at</strong> i. update the size array after each union.</p>
+<p>Now:</p>
+<ol>
+<li>union takes constant time, given roots.</li>
+<li>find takes time proportional to depth of p and q. Depth of any node x is at most lgN</li>
+<li>initialize: O(N); union: O(lgN); find(lgN)</li>
+</ol>
+<h4 id="path-compression"><a href="#path-compression" class="headerlink" title="path compression"></a>path compression</h4><p>Another way: Just after computing the root of p, set id[] of each examined to that root. 在寻找root的时候，把走过的每个object都连到root上。</p>
+<blockquote>
+<p>Java implementation：<br>add one line in the root function while loop <code>id[u] = id[id[i]]</code></p>
+</blockquote>
+<p>In theory, weighted quick-union with path compression is not quite linear, however in practice, wqupc is linear.</p>
+<h3 id="Union-Find-Application"><a href="#Union-Find-Application" class="headerlink" title="Union-Find Application"></a>Union-Find Application</h3><ul>
+<li>percolation</li>
+<li>Social network connectivity. Given a social network containing n members and a log file containing m timestamps at which times pairs of members formed friendships, design an algorithm to determine the earliest time at which all members are connected (i.e., every member is a friend of a friend of a friend … of a friend). Assume that the log file is sorted by timestamp and that friendship is an equivalence relation. The running time of your algorithm should be mlogn or better and use extra space proportional to n.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Solution:</div><div class="line"> *</div><div class="line"> * Use a union-find data structure with each site representing a social network</div><div class="line"> * member. Add unions between sites in time order of friendships being formed.</div><div class="line"> * After each union is added, check the number of connected components</div><div class="line"> * within the union-find data structure. If only one, all members are connected.</div><div class="line"> *</div><div class="line"> * Must keep track of number of unique components. Decreases when a union occurs</div><div class="line"> * between different components.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Determine when all members of a social network are connected.</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SocialNetworkConnectivity</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">private</span> UnionFindUF uf;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">int</span> numComponents;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">SocialNetworkConnectivity</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</div><div class="line">    uf = <span class="keyword">new</span> QuickFindUF(N);</div><div class="line">    numComponents = N;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFriendship</span><span class="params">(<span class="keyword">int</span> p1, <span class="keyword">int</span> p2)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (!uf.connected(p1, p2)) &#123;</div><div class="line">      --numComponents;</div><div class="line">    &#125;</div><div class="line">    uf.union(p1,p2);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">fullyConnected</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.numComponents == <span class="number">1</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// initialize social network data structure with N sites</span></div><div class="line"></div><div class="line">    <span class="keyword">while</span> (!f.isEmpty()) &#123;</div><div class="line">      <span class="comment">// read timestamp and relationship</span></div><div class="line">      <span class="comment">// union relationship</span></div><div class="line">      <span class="comment">// check if members fully connected</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Union-find with specific canonical element. Add a method 𝚏𝚒𝚗𝚍() to the union-find data type so that 𝚏𝚒𝚗𝚍(𝚒) returns the largest element in the connected component containing i. The operations, 𝚞𝚗𝚒𝚘𝚗(), 𝚌𝚘𝚗𝚗𝚎𝚌𝚝𝚎𝚍(), and 𝚏𝚒𝚗𝚍() should all take logarithmic time or better. For example, if one of the connected components is {1,2,6,9}, then the 𝚏𝚒𝚗𝚍() method should return 9 for each of the four elements in the connected components.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UFWithFindLargest</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id[]; <span class="comment">// id[i] = parent of node i</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> sz[]; <span class="comment">// sz[i] = size of node i</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> large[]; <span class="comment">// large[i] = largest element in component</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UFWithFindLargest</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</div><div class="line">        id = <span class="keyword">new</span> <span class="keyword">int</span>[N];</div><div class="line">        sz = <span class="keyword">new</span> <span class="keyword">int</span>[N];</div><div class="line">        large = <span class="keyword">new</span> <span class="keyword">int</span>[N];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</div><div class="line">            id[i] = i;</div><div class="line">            sz[i] = <span class="number">1</span>;</div><div class="line">            large[i] = i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">root</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</div><div class="line">        <span class="keyword">while</span> (id[p] != p) &#123;</div><div class="line">            id[p] = id[id[p]]; <span class="comment">// path compression</span></div><div class="line">            p = id[p];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> p;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// return the largest element in the connected component containing p</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123; </div><div class="line">        <span class="keyword">return</span> large[root(p)];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> rootp = root(p);</div><div class="line">        <span class="keyword">int</span> rootq = root(q);</div><div class="line">        <span class="keyword">if</span> (rootp == rootq) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">int</span> largestP = large[rootp];</div><div class="line">        <span class="keyword">int</span> largestQ = large[rootq];</div><div class="line">        <span class="keyword">if</span> (sz[rootp] &lt; sz[rootq]) &#123;</div><div class="line">            id[rootp] = rootq;</div><div class="line">            sz[rootq] += sz[rootp];</div><div class="line">            </div><div class="line">            <span class="keyword">if</span> (largestP &gt; largestQ)</div><div class="line">                large[rootq] = largestP;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            id[rootq] = rootp;</div><div class="line">            sz[rootp] += sz[rootq];</div><div class="line">            </div><div class="line">            <span class="keyword">if</span> (largestQ &gt; largestP)</div><div class="line">                large[rootp] = largestQ;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">connected</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> root(p) == root(q);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        UFWithFindLargest uf = <span class="keyword">new</span> UFWithFindLargest(<span class="number">10</span>);</div><div class="line">        uf.union(<span class="number">0</span>, <span class="number">2</span>);</div><div class="line">        uf.union(<span class="number">8</span>, <span class="number">4</span>);</div><div class="line">        StdOut.println(uf.find(<span class="number">0</span>) == <span class="number">2</span>);</div><div class="line">        StdOut.println(uf.find(<span class="number">4</span>) == <span class="number">8</span>);</div><div class="line">        uf.union(<span class="number">0</span>, <span class="number">4</span>);</div><div class="line">        StdOut.println(uf.find(<span class="number">0</span>) == <span class="number">8</span>);</div><div class="line">        StdOut.println(uf.find(<span class="number">2</span>) == <span class="number">8</span>);</div><div class="line">        uf.union(<span class="number">0</span>, <span class="number">6</span>);</div><div class="line">        StdOut.println(uf.find(<span class="number">6</span>) == <span class="number">8</span>);</div><div class="line">        uf.union(<span class="number">1</span>, <span class="number">9</span>);</div><div class="line">        uf.union(<span class="number">1</span>, <span class="number">2</span>);</div><div class="line">        StdOut.println(uf.find(<span class="number">4</span>) == <span class="number">9</span>);</div><div class="line">    &#125;   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Successor with delete. Given a set of n integers S={0,1,…,n−1} and a sequence of requests of the following form: 1. Remove x from S; 2. Find the successor of x: the smallest y in S such that y≥x. Design a data type so that all operations (except construction) take logarithmic time or better in the worst case.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">  Solution:</div><div class="line">  Use union find data structure to mark successor of each integer. When an</div><div class="line">  integer is removed, the union find data structure connects to the next</div><div class="line">  integer in the list (which may be farther up the list). Must be careful with</div><div class="line">  optimizations since connected component id is the successor integer.</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.QuickFindUF;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuccessorWithDelete</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">private</span> QuickFindUF uf;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">SuccessorWithDelete</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</div><div class="line">    uf = <span class="keyword">new</span> QuickFindUF(N);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">    uf.union(x, x+<span class="number">1</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">successor</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> uf.find(x);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> N = <span class="number">50</span>;</div><div class="line">    SuccessorWithDelete swd = <span class="keyword">new</span> SuccessorWithDelete(<span class="number">50</span>);</div><div class="line">    System.out.println(swd.successor(<span class="number">10</span>));</div><div class="line">    swd.remove(<span class="number">11</span>);</div><div class="line">    swd.remove(<span class="number">13</span>);</div><div class="line">    swd.remove(<span class="number">12</span>);</div><div class="line">    swd.remove(<span class="number">10</span>);</div><div class="line">    swd.remove(<span class="number">9</span>);</div><div class="line">    swd.remove(<span class="number">15</span>);</div><div class="line">    System.out.println(swd.successor(<span class="number">8</span>));</div><div class="line">    System.out.println(swd.successor(<span class="number">9</span>));</div><div class="line">    System.out.println(swd.successor(<span class="number">10</span>));</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>小结：UF我从来没用过，很新的知识点。</p>
+<h2 id="Analysis-Of-Algorithms"><a href="#Analysis-Of-Algorithms" class="headerlink" title="Analysis Of Algorithms"></a>Analysis Of Algorithms</h2><p>遇到的问题：</p>
+<ul>
+<li><p>3Sum brute force algorithm time complexity is：n(n-1)(n-2)/6.</p>
+<p>  Calculate process: </p>
+<p>  The <strong>3rd</strong> nested loop is the important one. It will loop through <code>n-2</code> times. Then the <strong>2nd</strong> loop increments. </p>
+<p>  At this point the <strong>3rd</strong> loop loops through <code>n-3</code> times.</p>
+<p>  We keep adding these till we get.<br>  <code>[(n-2) + (n-3) + ... + 2 + 1 + 0]</code></p>
+<p>  Then the <strong>1st</strong> loop increments, so when we calculate the <strong>3rd</strong> loop we begin at <code>n-3</code> this time.<br>  So we get:<br>  <code>[(n-3) + ... + 2 + 1 + 0]</code></p>
+<p>  Adding them all together we get:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[(n-2) + (n-3) + ... + 2 + 1 + 0] +</div><div class="line">[(n-3) + ... + 2 + 1 + 0]         +</div><div class="line">[(n-4) + ... + 2 + 1 + 0]         +</div><div class="line">.</div><div class="line">.                                     &lt;- (n-2 times)</div><div class="line">.</div><div class="line">[2 + 1 + 0]                       +</div><div class="line">[1 + 0]                           +</div><div class="line">[0]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<pre><code>We can rewrite this as:
+
+`(n-2)(1) + (n-3)(2) + (n-4)(3) + ... + (3)(n-4) + (2)(n-3) + (1)(n-2)`
+
+Which in maths notation we can write like this:
+
+![](https://lh3.googleusercontent.com/-AT9724QIv7c/WZJA-VTGviI/AAAAAAAAAIQ/aYyKOBtVGd8N4NZauOLBLD1cfGfw8dRZgCHMYCw/I/15027571132327.png)
+
+Make sure you look up the additive properties of Summations. 
+
+We have:
+
+(n-1) * (n-2)(n-1)/2 - (n-1)(n-2)(2n-3)/6 = n(n-2)(n-1)/6
+</code></pre><ul>
+<li><p>为什么循环中每次乘以2或除以2时间复杂度是lgn？</p>
+<p>  For example，<code>for(i=1;i&lt;n;i*2)</code> 这个循环总共run了<code>k</code>次，那么最后的<code>i=2^k</code>，那么<code>2^k &gt;= n</code>，得到 <code>k &gt;= lgn</code></p>
+<p>  除以2同理。</p>
+</li>
+<li><p>Cost model. 之前学过，找出最能决定big O的一项</p>
+</li>
+<li>harmonic numbers：Hn 1+1/2+1/3+…+1/n ～ lnN</li>
+<li>triangular sum：1+2+…+n ～ n^2/2</li>
+<li>geometric sum：1+2+4+8+…+N = 2N – 1 ~ 2N when N = 2^n</li>
+<li>Stirling’s approximation：lgN! = lg1+lg2+lg3+…+lgN ~ NlgN</li>
+<li>binomial coefﬁcients: (上N下k)~N^k/k! when k is a small constant</li>
+<li>exponential: (1 – 1/x) x ~ 1/e</li>
+<li>表示算法增长的方程只有几个：1 (constant), logN (logarithmic), N (linear), NlogN (linearithmic), N^2 (quadratic), N^3 (cubic), and 2^N (exponential)</li>
+<li>设计一个算法，先找出最笨的算法，找到一个upper bound，然后prove这个问题有一个lower bound，如果upper bound和lower bound存在差距，那么算法就有优化的空间。</li>
+<li>Big O，Big Theta，Big Omega的区别。Theta 表示classify algorithms，比如Theta(N^2) 就是10N^2或10N^2+8N+3NlogN。big O 表示upper bound，O(N^2)可以表示任何小于等于N^2的，比如10N^2。Big Omega表示 lower bound。</li>
+<li>Tilde notation表示最重要的那一个term，是approximate model。10N^2+8N+3NlogN的tilde 就是10N^2</li>
+<li>boolean 1 byte，byte 1 byte，char 2 byte，int 4 byte，float 4 byte，long 8 byte，double 8 byte；Char[] 2N+24 byte, int[] 8N+24 byte, double[] 8N+24 byte; char[][] 2MN byte, int[][] 4MN byte, double[][] 8MN byte</li>
+<li>关于object的内存使用。一个object ：object overhead 16byte + reference（一个reference是8byte）+ padding（8的倍数，4，8，16……）+ object的attributes 占用的内存。如果array或其他数据结构里面存的是指针，那么recursively add memory for referenced object。</li>
+</ul>
+<h2 id="Stacks-And-Queues"><a href="#Stacks-And-Queues" class="headerlink" title="Stacks And Queues"></a>Stacks And Queues</h2><p>一些细节问题：</p>
+<ul>
+<li>stack linked list implementation 更快，Every operat</li>
+</ul>
+<p>ion takes constant time in the worst case。但是需要更多space 和 time 来处理links</p>
+<ul>
+<li>stack resizing array implementation 慢一点，push pop的worst case是n，但是占用的space 少。</li>
+<li>compile-time error 比 run-time error 好，因为在compile 的时候就能发现错误。</li>
+<li>good code has zero casts。但是java 不允许 generic type的<code>array</code> : <code>Item[Capacity]</code> 是不允许的。所以我们定义成这样 <code>(Item[]) new Object[Capacity]</code></li>
+<li><code>Iterable</code> 有 <code>Iterator()</code> method; <code>Iterator</code> 有 <code>next(); hasNext()</code> method.</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+            <a href="/tags/week1/" rel="tag"># week1</a>
+          
+            <a href="/tags/coursera/" rel="tag"># coursera</a>
+          
+            <a href="/tags/Princeton/" rel="tag"># Princeton</a>
+          
+            <a href="/tags/notes/" rel="tag"># notes</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/Dynamic-Programming/动态规划总结之：动态规划的定义和意义/" rel="next" title="动态规划总结之：动态规划学习笔记（1）">
+                <i class="fa fa-chevron-left"></i> 动态规划总结之：动态规划学习笔记（1）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/Compiler/Compiler编译器/" rel="prev" title="Compiler编译器笔记">
+                Compiler编译器笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Ruida" />
+          <p class="site-author-name" itemprop="name">Ruida</p>
+           
+              <p class="site-description motion-element" itemprop="description">我欲乘风破浪 踏遍黄沙海洋</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xrdcrab" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Steps-to-developing-a-usable-algorithm"><span class="nav-number">1.</span> <span class="nav-text">Steps to developing a usable algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Union-Find"><span class="nav-number">2.</span> <span class="nav-text">Union Find</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Modeling-the-connections"><span class="nav-number">2.1.</span> <span class="nav-text">Modeling the connections</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#U-F-data-type"><span class="nav-number">2.2.</span> <span class="nav-text">U-F data type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quick-Find-eager-approach"><span class="nav-number">2.3.</span> <span class="nav-text">Quick Find (eager approach)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quick-Union-lazy-approach"><span class="nav-number">2.4.</span> <span class="nav-text">Quick Union (lazy approach)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quick-Union-Improvements"><span class="nav-number">2.5.</span> <span class="nav-text">Quick Union Improvements</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#weighting"><span class="nav-number">2.5.1.</span> <span class="nav-text">weighting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#path-compression"><span class="nav-number">2.5.2.</span> <span class="nav-text">path compression</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Union-Find-Application"><span class="nav-number">2.6.</span> <span class="nav-text">Union-Find Application</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-Of-Algorithms"><span class="nav-number">3.</span> <span class="nav-text">Analysis Of Algorithms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stacks-And-Queues"><span class="nav-number">4.</span> <span class="nav-text">Stacks And Queues</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ruida</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xrdnotes.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://xrdcrab.github.io/2017/coursera/Algorithms-Part1-Week1-Notes/';
+          this.page.identifier = '2017/coursera/Algorithms-Part1-Week1-Notes/';
+          this.page.title = 'Algorithms Part1 Week1 Notes';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xrdnotes.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("EFAiuTSbiEfToeNmrabxQ1RL-gzGzoHsz", "xgc25DYeqW3P8xT6Mny1J6s3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>

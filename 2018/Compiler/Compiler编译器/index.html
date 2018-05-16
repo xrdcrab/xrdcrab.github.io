@@ -1,0 +1,1298 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="brMYyT1TsoXjE82bi8Fh_yrR_q9QnAfxQnOM0zRoBYQ" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Compiler,编译器,SML," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Lecture notes of CMPT442 Compiler Design and Implementation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Compiler编译器笔记">
+<meta property="og:url" content="https://xrdcrab.github.io/2018/Compiler/Compiler编译器/index.html">
+<meta property="og:site_name" content="Ruida's Notes">
+<meta property="og:description" content="Lecture notes of CMPT442 Compiler Design and Implementation">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-FHAOI-F5dzw/WuTvDJ4ChaI/AAAAAAAAALU/JuMDTKhkQ9UaHXpStPbpXtwCEDEKWh0QgCHMYCw/I/15249528432780.jpg">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-P325gFDAIAY/Wvp8T36pcfI/AAAAAAAAAL4/U2ylmS1C_OQus8xmityWOGpAT_uenqCOwCHMYCw/I/Screen%2BShot%2B2018-05-15%2Bat%2B12.20.45%2BAM.png">
+<meta property="og:updated_time" content="2018-05-16T08:13:02.524Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Compiler编译器笔记">
+<meta name="twitter:description" content="Lecture notes of CMPT442 Compiler Design and Implementation">
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/-FHAOI-F5dzw/WuTvDJ4ChaI/AAAAAAAAALU/JuMDTKhkQ9UaHXpStPbpXtwCEDEKWh0QgCHMYCw/I/15249528432780.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'AF5N0VB0PG',
+      apiKey: '8dc82519314faeb29c0ef79e4c7c386e',
+      indexName: 'blog_notes',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xrdcrab.github.io/2018/Compiler/Compiler编译器/"/>
+
+
+
+
+
+  <title> Compiler编译器笔记 | Ruida's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ruida's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Keep moving. Don't settle.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xrdcrab.github.io/2018/Compiler/Compiler编译器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruida">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruida's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Compiler编译器笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-28T15:48:01-06:00">
+                2018-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Compiler/" itemprop="url" rel="index">
+                    <span itemprop="name">Compiler</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/Compiler/Compiler编译器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/Compiler/Compiler编译器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/Compiler/Compiler编译器/" class="leancloud_visitors" data-flag-title="Compiler编译器笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  Lecture notes of CMPT442 Compiler Design and Implementation
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p><strong>笔记内容不涉及编译器实现</strong><br>Textbook: 虎书ML版（Modern Compiler Implementation in ML）<br>Chapters: 1-12</p>
+<h2 id="编译器组成结构"><a href="#编译器组成结构" class="headerlink" title="编译器组成结构"></a>编译器组成结构</h2><p><img src="https://lh3.googleusercontent.com/-FHAOI-F5dzw/WuTvDJ4ChaI/AAAAAAAAALU/JuMDTKhkQ9UaHXpStPbpXtwCEDEKWh0QgCHMYCw/I/15249528432780.jpg" alt=""><br>(图片来自虎书第四页)</p>
+<p>编译器可分为Front-end, Middle-end, Back-end.</p>
+<ol>
+<li>Front-end: <ol>
+<li>词法分析(Lexical Analysis) 将输入的character stream（代码）parse 成 token stream。使用工具为：lex/flex（用regular expression匹配）</li>
+<li>句法分析(Syntax Analysis) 根据语言的语法结构将tokens parse 生成abstract syntax tree.</li>
+</ol>
+</li>
+<li>Middle-end: 语义分析(Semantic Analysis) 检查程序是否可编译（type check AST 确保每个exp都有正确的type）然后将AST translate成IR tree（intermediate representation tree）</li>
+<li>Back-end: 规范化（canonicalization &amp; linearization）指令选择，控制流分析，数据流分析，寄存器分配，指令流出，整合，优化。</li>
+</ol>
+<h2 id="Front-end"><a href="#Front-end" class="headerlink" title="Front-end"></a>Front-end</h2><p><strong>chapter 1-4</strong></p>
+<h3 id="Part-1-词法分析"><a href="#Part-1-词法分析" class="headerlink" title="Part 1 词法分析"></a>Part 1 词法分析</h3><p>使用正则表达式将程序（此时的程序是concrete syntax）匹配成token。tokens分成numbers，identifiers，punctuation，key words等等。</p>
+<p>正则表达式的规则很容易理解，但是正则表达式并不能直接用来解析字符串，所以我们还要引入一种适合转化为计算机程序的模型—–<strong>有穷自动机</strong>（finite automation，FA）</p>
+<p>根据正则表达式画出<strong>非确定性有穷自动机</strong>（NFA），因为NFA简单，易于思考。但是计算机硬件对于NFA的猜测能力实现起来很困难，所以我们要把NFA转化为<strong>确定性有穷自动机</strong>（DFA）。</p>
+<p>有很多工具可以实现lexical analysis，我们在这里使用flex。</p>
+<h3 id="Part-2-句法分析"><a href="#Part-2-句法分析" class="headerlink" title="Part 2 句法分析"></a>Part 2 句法分析</h3><p>目的是构建AST（Abstract Syntax Tree）。因为一种完整的编程语言，必须在 stream of tokens 的基础上定义出各种声明、语句和表达式的语法规则。</p>
+<p>观察我们所熟悉的编程语言，其语法大都有某种递归的性质。例如四则运算与括号的表达式，其每个运算符的两边，都可以是任意的表达式。比如1+a是表达式，(1+a)/(2 – c)也是表达式，((a+b) + c) / (d – e)也是表达式。再比如if语句，其if的块和else的块中还可以再嵌套if语句。我们在词法分析中引入的正则表达式和正则语言无法描述这种结构，如果用DFA来解释，DFA只有有限个状态，它没有办法追溯这种无限递归。所以，编程语言的表达式，并不是<strong>正则语言</strong>。我们要引入一种表现能力更强的语言——<strong>上下文无关语言</strong>。</p>
+<h4 id="上下文无关文法"><a href="#上下文无关文法" class="headerlink" title="上下文无关文法"></a>上下文无关文法</h4><ol>
+<li><p>产生式</p>
+<p>我们假设表达式只有三种——单个表示变量名标识符、括号括起来的表达式和两个表达式相加。比如a是一个变量表达式，a+b是两个变量表达式相加的表达式，(a+b)是一个括号表达式。我们用符号E来表示一个表达式，那么这三种表达式分别可以定义为：</p>
+<pre><code>E → id
+E → E + E
+E → E * E
+E → ( E )
+</code></pre><p>这种形式的定义就叫做<strong>产生式</strong>（production）。出现在→<strong>左侧</strong>符号<strong>E</strong>称作<strong>非终结符</strong>（nonterminal symbol），代表可以继续产生新符号的“文法变量”。 符号→<strong>右侧</strong>表示非终结符可以“产生”的东西。而上述产生式中的<strong>id、+、（</strong>等符号，是具有固定意义的token，它们不再会产生新的东西，称作<strong>终结符</strong>（terminal symbol）。</p>
+<p><strong>注意</strong>，非终结符可以出现在产生式的右侧，这就是具有递归性质文法的来源。产生式经过一系列的<strong>推导</strong>（derivation），就能够生成各种完全由终结符组成的句子。比如，我们演示一下表达式(a + b) + c的推导过程：</p>
+<pre><code>E  =&gt;  E + E  =&gt;  (E) + E  =&gt;  (E + E) + E  =&gt;  
+(a + E) + E =&gt;  (a + b) + E  =&gt;  (a + b) + c
+</code></pre><p>以上推导过程中，我们每次都将句型中最左边一个非终结符展开，所以这种推导称为<strong>最左推导</strong>。当然也有<strong>最右推导</strong>，不同之处就算是每次将句型中最右边的非终结符展开：</p>
+<pre><code>E  =&gt;  E + E  =&gt;  E + c  =&gt;  (E) + c  =&gt;  (E + E) + c  =&gt;  
+(E + b) + c  =&gt;  (a + b) + c
+</code></pre></li>
+<li><p>LL parse 和 LR parse</p>
+<ul>
+<li>LL 意思是 from left to right，left most derivation；LR 意思是 from left to right，Right most derivation。</li>
+<li>LL输出解析树的先序遍历，LR后序遍历。</li>
+<li>LL产生最左导出，LR产生<strong>逆转最右</strong>导出。</li>
+<li>LL 是Top-down build 解析树；LR 是 Bottom-up build 解析树</li>
+<li><p>LL 是 predictive parser，是递归下降；LR 是 shift-reduce parser。一次shift-reduce是把右边替换成左边的过程，也就是推导的逆过程，是某次R-derivation 的逆过程。所以是bottom up 构建解析树。举例如下：</p>
+<pre><code> 在LL解析过程中，解析器不断地在两个操作中进行选择：
+
+ 预测：选择应该应用哪种production来输入字符串。
+ 匹配：输入最左边未启用的符号来进行匹配。
+
+ 例如，
+
+        S → E
+
+        E → T + E
+
+        E → T
+
+        T → int
+
+ 然后给出字符串int + int + int，LL(2)解析器，如下所示：
+
+        Production       Input              Action
+        ---------------------------------------------------------
+        S                int + int + int    Predict S -&gt; E
+        E                int + int + int    Predict E -&gt; T + E
+        T + E            int + int + int    Predict T -&gt; int
+        int + E          int + int + int    Match int
+        + E              + int + int        Match +
+        E                int + int          Predict E -&gt; T + E
+        T + E            int + int          Predict T -&gt; int
+        int + E          int + int          Match int
+        + E              + int              Match +
+        E                int                Predict E -&gt; T
+        T                int                Predict T -&gt; int
+        int              int                Match int
+                                            Accept
+
+ 这个过程一般是用预测分析表来做，根据表达式找到first、follow、nullable sets。超前查看n就是把可能的follow也考虑进去。
+
+ 在LR解析器中，有两个操作：
+    Shift：：向缓冲区中添加下一个输入token
+    Reduce：：选择一个grammar rule，从workspace中pop出token然后push →左侧的非终结符进去。
+    Go to：：start next thing
+
+如下所示：  
+
+        Workspace        Input              Action
+        ---------------------------------------------------------
+                         int + int + int    Shift
+        int              + int + int        Reduce T -&gt; int
+        T                + int + int        Shift
+        T +              int + int          Shift
+        T + int          + int              Reduce T -&gt; int
+        T + T            + int              Shift
+        T + T +          int                Shift
+        T + T + int                         Reduce T -&gt; int
+        T + T + T                           Reduce E -&gt; T
+        T + T + E                           Reduce E -&gt; T + E
+        T + E                               Reduce E -&gt; T + E
+        E                                   Reduce S -&gt; E
+        S                                   Accept             
+</code></pre></li>
+</ul>
+</li>
+<li><p>消除二义性，消除conflicts</p>
+<p> 如果一个grammar可以推导出一条具有不同语法树的sentence，那么这个grammar就是ambiguous grammar。还是用 产生式 小节中的grammar 举例，a+b*c 就有两个不同的解析树</p>
+<pre><code>最左推导1：E  =&gt;  E + E  =&gt;  E * E + E  =&gt;  a * E + E  =&gt;  a * b + E  =&gt; a * b + c
+
+最左推导2：E  =&gt;  E * E  =&gt;  a * E  =&gt;  a * E + E  =&gt;  a * b + E  =&gt;  a * b + c
+</code></pre><p>我们一般通过文法转换也就是修改grammar增加辅助non terminal token 来消除ambiguous。</p>
+<p> 冲突有Shift-Reduce conflict和Reduce-Reduce Conflict。我们常用两种方法来解决冲突。</p>
+<ol>
+<li>改变优先级</li>
+<li><p>增加辅助 non terminal</p>
+<p>关于优先级指导（在yacc中的优先级指导）有如下几点特点：</p>
+<ol>
+<li>规则（rule）的优先级由该规则的最后出现的token（终结符）决定。</li>
+<li>当规则和token的优先级相等时，用%left 指明的优先级偏向于reduce，%right 指明的偏向于shift，而%nonassoc 则导致error</li>
+<li>%prec命令可以给rule指定一种明确的优先级。例如：UMINUS。%prec UMINUS 给了规则 exp：MINUS exp最高优先级。常用来解决负数问题。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="抽象语法"><a href="#抽象语法" class="headerlink" title="抽象语法"></a>抽象语法</h4><p>根据上述知识我们可以构建source language的上下文无关文法（就是写他们的production）。在虎书中就是完成tiger.grm文件。使用的工具叫做YACC。编译器的前端工作在识别一个句子是属于source language（符合source language的语法规则，也就是符合它的文法）之后，它还要对那个句子做一些事情，称为语义动作（semantic action）。在递归下降的语法分析器中，语义行为是parsing function返回的值或这些函数的副作用（side effects）或同时是这二者。</p>
+<p>AST（抽象语法树）是一种数据结构，为了更好的模块化编译器，将语法问题与语义问题分开处理，我们需要生成AST。抽象语法起一个接口作用。</p>
+<h2 id="Middle-end"><a href="#Middle-end" class="headerlink" title="Middle-end"></a>Middle-end</h2><p>编译器的middle-end 是对front-end构建的AST遍历进行语义分析，同时将生成intermediate representation tree。在这个阶段，最重要的是检查语句是不是compilable。语义分析是编译器前端最复杂的部分。</p>
+<h3 id="类型检查"><a href="#类型检查" class="headerlink" title="类型检查"></a>类型检查</h3><p>所谓编程语言语义，就是这段代码实际的含义。编程语言的代码必须有绝对明确的含义，这样人们才能让程序做自己想做的事情。比如最简单的一行代码：a = 1; 它的语义是“将32位整型常量存储到变量a中”。首先我们对“1”有明确的定义，它是32位有符号整型字面量，这里“32位有符号整型”就是表达式“1”的类型。其次，这句话成为合法的编程语言，32位整型常量必须能够隐式转换为a的<strong>类型</strong>。假设a就是int型变量，那么这条语句就直接将1存储到a所在内存里。如果a是浮点数类型的，那么这句话就隐含着将整型常量1转换为浮点类型的步骤。在语义分析中，<strong>类型检查</strong>是贯穿始终的一个步骤。</p>
+<p><strong>Symbol table</strong>是语义分析阶段主要用到的数据结构。符号表（环境）是由绑定构成的集合。</p>
+<ul>
+<li><p>Contains entries mapping identiﬁers to their bindings (e.g. type)</p>
+</li>
+<li><p>As new type, variable, function declarations encountered, symbol table augmented with entries mapping identiﬁers to bindings.</p>
+</li>
+<li><p>When identiﬁer subsequently used, symbol table consulted to ﬁnd info about identiﬁer.</p>
+</li>
+<li><p>When identiﬁer goes out of scope, entries are removed.</p>
+</li>
+</ul>
+<p>有两种symbol table的实现方式：</p>
+<ol>
+<li><p>functional style（无副作用）</p>
+<ul>
+<li>When beginning-of-scope entered, new environment created by adding to old one, but old table remains intact.</li>
+<li>When end-of-scope reached, retrieve old table.</li>
+</ul>
+</li>
+<li><p>imperative style（副作用）</p>
+<ul>
+<li>Global symbol table</li>
+<li>When beginning-of-scope entered, entries added to table using side-effects. (old table destroyed)</li>
+<li>When end-of-scope reached, auxiliary info used to remove previous additions.(old table reconstructed)</li>
+</ul>
+</li>
+</ol>
+<p>在tiger 的compiler中，我们需要两个环境，一个Type environment（maps type symbol to type that it stands for），一个Value environment（maps variable symbol to its type）</p>
+<h3 id="AR-活动记录-Activation-Records"><a href="#AR-活动记录-Activation-Records" class="headerlink" title="AR 活动记录 Activation Records"></a>AR 活动记录 Activation Records</h3><p>在现代程序语言中的局部变量都是在函数的入口创建，在函数return的时候摧毁。</p>
+<p>对函数的每次调用都会 has its own instantiation of local variables：</p>
+<ul>
+<li><p>Recursive calls to a function require several instantiations to exist simultaneously.</p>
+</li>
+<li><p>Functions return only after all functions it calls have returned µ last-in-ﬁrst-out (LIFO) behavior.</p>
+</li>
+<li><p>A LIFO structure called a stack is used to hold each instantiation.</p>
+</li>
+</ul>
+<p>The portion of the stack used for an invocation of a function is called the function’s <strong>stack frame</strong> or <strong>activation record</strong>.</p>
+<p> <img src="https://lh3.googleusercontent.com/-P325gFDAIAY/Wvp8T36pcfI/AAAAAAAAAL4/U2ylmS1C_OQus8xmityWOGpAT_uenqCOwCHMYCw/I/Screen%2BShot%2B2018-05-15%2Bat%2B12.20.45%2BAM.png" alt="Screen Shot 2018-05-15 at 12.20.45 AM"></p>
+<p>就像冰锥一样，从上往下生长。saved registers 后面 stack pointer前面是outgoing args。就像frame pointer前面的incoming args 一样。</p>
+<p>举例说明：</p>
+<ul>
+<li>function g(…) calls f(a1,…,an)</li>
+<li>在进入f(…)的时候，SP points to first arg that g() passes to f(). Allocate a frame（新的frame）。SP - Frame size</li>
+<li>old SP 就是新的 FP</li>
+<li>Frame size要很晚才知道。因为要等到memory-resident temporaries and saved registers 确定了</li>
+<li>如果callee需要在memory中写入任何incoming args，put them in ”local vars“ in frame；caller f() 将a1…ak 放入register，将ak+1 … an 放入frame tail (outgoing args)</li>
+<li>caller的outgoing args就是callee 的incoming args</li>
+</ul>
+<h4 id="关于variable-逃逸："><a href="#关于variable-逃逸：" class="headerlink" title="关于variable 逃逸："></a>关于variable 逃逸：</h4><pre><code>A variable escapes if:
+
+- it is passed by reference,
+
+- its address is taken, or
+
+- it is accessed from a nested function.
+</code></pre><h4 id="关于-Stack-Frame-和-Registers："><a href="#关于-Stack-Frame-和-Registers：" class="headerlink" title="关于 Stack Frame 和 Registers："></a>关于 Stack Frame 和 Registers：</h4><ol>
+<li><p>Registers hold:</p>
+<ul>
+<li>Some Parameters </li>
+<li>Return Value </li>
+<li>Local Variables </li>
+<li>Intermediate results of expressions (temporaries)</li>
+</ul>
+</li>
+<li><p>Stack Frame holds：</p>
+<ul>
+<li>Variables passed by reference or have their address taken (&amp;) </li>
+<li>Variables that are accessed by procedures nested within current one.</li>
+<li>Variables that are too large to ﬁt into register ﬁle.</li>
+<li>Array variables (address arithmetic needed to access array elements).</li>
+<li>Variables whose registers are needed for a speciﬁc purpose (parameter passing) </li>
+<li>Spilled registers. Too many local variables to ﬁt into register ﬁle, so some must be stored in stack frame.</li>
+</ul>
+</li>
+</ol>
+<h4 id="关于-Static-Link："><a href="#关于-Static-Link：" class="headerlink" title="关于 Static Link："></a>关于 Static Link：</h4><ul>
+<li>SL是FP指着的第一个，也就是incoming args的第一个。</li>
+<li>SL是a pointer to the frame of the function statically <strong>enclosing calle</strong></li>
+<li>自己call 自己，传的是自己的SL不是FP</li>
+<li>同级别（level）的function，SL一样。 g() calls d(), d() nested in f(), d()的SL是f() 的FP。</li>
+</ul>
+<h4 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h4><p>The assignment of variables to registers is done by the Register Allocator.</p>
+<ol>
+<li><p>Caller-save register are the responsibility of the calling function.</p>
+<ul>
+<li><p>Caller-save register values are saved to the stack by the calling function if they will be used after the call.</p>
+</li>
+<li><p>The callee function can use caller-save registers without saving their original values.</p>
+</li>
+</ul>
+</li>
+<li><p>Callee-save registers are the responsibility of the called function.</p>
+<ul>
+<li><p>Callee-save register values must be saved to the stack by called function before they can be used.</p>
+</li>
+<li><p>The caller (calling function) can assume that these registers will contain the same value before and after the call.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>Placement of values into callee-save vs. caller-save registers is determined by the register allocator.</p>
+<h3 id="翻译-Translate-to-IR-Tree"><a href="#翻译-Translate-to-IR-Tree" class="headerlink" title="翻译 Translate to IR Tree"></a>翻译 Translate to IR Tree</h3><p>翻译成IR Tree是为了更好的模块化。因为source code和target code有很多种。</p>
+<p>Intermediate Representation (IR):</p>
+<ul>
+<li><p>An abstract machine language</p>
+</li>
+<li><p>Expresses operations of target machine</p>
+</li>
+<li><p>Not speciﬁc to any particular machine</p>
+</li>
+<li><p>Independent of source language</p>
+</li>
+</ul>
+<h4 id="函数的Prologue-和Epilogue"><a href="#函数的Prologue-和Epilogue" class="headerlink" title="函数的Prologue 和Epilogue"></a>函数的Prologue 和Epilogue</h4><p>Prologue precedes body in assembly version of function:</p>
+<ol>
+<li><p>Assembly directives that announce beginning of function.</p>
+</li>
+<li><p>Label deﬁnition for function name.</p>
+</li>
+<li><p>Instruction to adjust stack pointer (SP) - allocate new frame.</p>
+</li>
+<li><p>Instructions to save escaping arguments into stack frame, instructions to move nonescaping arguments into fresh temporary registers.</p>
+</li>
+<li><p>Instructions to store into stack frame any callee-save registers used within function.</p>
+</li>
+</ol>
+<p>Epilogue follows body in assembly version of function:</p>
+<ol>
+<li><p>Instruction to move function result (return value) into return value register.</p>
+</li>
+<li><p>Instructions to restore any callee-save registers used within function.</p>
+</li>
+<li><p>Instruction to adjust stack pointer (SP) - deallocate frame.</p>
+</li>
+<li><p>Return instructions (jump to return address).</p>
+</li>
+<li><p>Assembly directives that announce end of function.</p>
+</li>
+</ol>
+<ul>
+<li>Steps 1, 3, 8, 10 depend on exact size of stack frame. </li>
+<li>These are generated late (after register allocation). </li>
+<li>Step 6: MOVE(TEMP(RV), unEx(body))</li>
+</ul>
+<h2 id="Back-end"><a href="#Back-end" class="headerlink" title="Back-end"></a>Back-end</h2><p>后端进行优化，指令选择，control flow analysis，data flow analysis，register allocation 等等。</p>
+<h3 id="Linearization-and-Canonicalization"><a href="#Linearization-and-Canonicalization" class="headerlink" title="Linearization and Canonicalization"></a>Linearization and Canonicalization</h3><p>翻译完成之后的IRTree 有问题：ESEQ和CALL node含有assignment语句和input/output，不能按照任意顺序执行。<br>真正的机器语言：</p>
+<ol>
+<li>CJUMP 在 false时下降到下一条指令（fall through）</li>
+<li>对于ESEQ，不同的计算顺序有不同的结果</li>
+<li>对于CALL，不同的计算顺序有不同的结果</li>
+<li>CALL nodes within argument list of CALL nodes cause problems of args passed in specialized registers。</li>
+</ol>
+<p>所以我们要对IR树进行规范化处理，得到规范树：</p>
+<pre><code>1. 无ESEQ/SEQ
+2. 每一个CALL的父亲不是EXP(...)就是MOVE(TEMP t, ...)
+</code></pre><p>Canonicalization: </p>
+<ol>
+<li>提升SEQ，ESEQ，bottom up</li>
+<li>消除SEQ，ESEQ，使得只有一个SEQ在top，把它改成list。</li>
+<li>提升CALL，让它surrounded by EXP or MOVE</li>
+</ol>
+<p>没有副作用就可以提升，这里有一个commute的概念：<strong>常数，空语句可以与任何exp交换，其他的都不行。</strong></p>
+<p>Canonicalization之后所有的SEQ都在树顶，进行Linearization。</p>
+<p>CJUMP也要经过处理，使得下一条指令是False label。</p>
+<p><strong>Basic Block：</strong></p>
+<ol>
+<li>first stm is LABEL</li>
+<li>The last stm is a JUMP or CJUMP</li>
+<li>No other LABEL，JUMP or CJUMP</li>
+</ol>
+<p>Trace：A sequence of statements that could be consecutively executed during the execution of the program.</p>
+<h3 id="Instruction-Selection"><a href="#Instruction-Selection" class="headerlink" title="Instruction Selection"></a>Instruction Selection</h3><p>Instruction Selection 是 Process of finding set of machine instructions that implement operations specified in IR tree.</p>
+<p>Each machine instruction can be specified as an IR tree fragment(tree pattern).</p>
+<p>就相当于用瓦片（tile）来不断的覆盖IR tree。一个瓦片就是一个tree pattern that corresponding to one instruction。</p>
+<p>这个阶段的目标是：cover IR tree without overlapping tree pattern.</p>
+<p>所以就会有两个概念：Optimal 和 Optimum Tilings. Optimum is also Optimal 但反之不是。</p>
+<ol>
+<li>Optimal: no two adjacent tiles can be combined into a lower cost tile</li>
+<li>Optimum: tiles sum to the lowest cost</li>
+</ol>
+<p>有两种算法来覆盖IR tree，一种用了动态规划，另一种就是普通的maximum munch（从root开始，找最大的tile，重复该过程；从相反的方向生成代码）。</p>
+<h3 id="Liveness-Analysis"><a href="#Liveness-Analysis" class="headerlink" title="Liveness Analysis"></a>Liveness Analysis</h3><p>在IR tree中我们假设的是有无限多的register。但是实际计算机上，寄存器的个数是有限的。如果两个变量a，b不会同时处于“使用中”，则可以把他们放在同一个寄存器中。如果一个变量在将来还要使用，则称这个变量是<strong>“活跃的”</strong>。</p>
+<p>进行活跃分析需要画出控制流图（control flow graph）。程序中每个语句都是图中的一个节点，如果语句x之后跟着语句y，则会有一条从x到y的边。</p>
+<h4 id="Control-Flow-Analysis"><a href="#Control-Flow-Analysis" class="headerlink" title="Control Flow Analysis"></a>Control Flow Analysis</h4><ul>
+<li>Control Flow Analysis determines the how instructions are fetched during execution. </li>
+<li>Control Flow Analysis precedes dataﬂow analysis.</li>
+<li>Dataﬂow analysis determines how data ﬂows among instructions.</li>
+<li>Dataﬂow analysis precedes optimization, register allocation, and scheduling.</li>
+</ul>
+<p>根据CFG画出冲突图，进行活跃分析。</p>
+<h3 id="寄存器分配"><a href="#寄存器分配" class="headerlink" title="寄存器分配"></a>寄存器分配</h3><p>寄存器分配实际上是个着色问题。</p>
+<p>冲突图的每一个节点代表一个临时变量，每条边（t1，t2）指出一对不能分配到同一寄存器的临时变量。产生冲突的最常见原因就是两个变量同时活跃。</p>
+<p>然后我们要给冲突图着色，每一种颜色代表着一个寄存器。我们希望用尽可能少的颜色（尽可能少的寄存器）。如果target machine有K个寄存器，则可以用K种颜色给图着色。最后得到的着色就是关于这个冲突图的一种合法的寄存器分配。如果不存在K色着色，我们就必须将一部分变量和临时变量存在memory中，这称之为<strong>溢出（spilling）</strong>。</p>
+<p>我们采用 Kempe 的算法for finding a K-coloring of a graph。</p>
+<pre><code>Assume K=3
+Step 1 (simplify):  find a node with at most K-1 edges and cut it out of the graph.  (Remember this node on a stack for later stages.)
+Once a coloring is found for the simpler graph, we can always color the node we saved on the stack
+Step 2 (color):  when the simplified subgraph has been colored, add back the node on the top of the stack and assign it a color not taken by one of the adjacent nodes 
+</code></pre><p>有时候the graph cannot be colored, it will eventually be simplified to graph in which every node has at least K neighbors<br>但是Sometimes, the graph is still K-colorable! 如果我们不能成功着色。</p>
+<pre><code>Step 3 (spilling):  once all nodes have K or more neighbors, pick a node for spilling
+</code></pre><p>Some variables are pre-assigned to registers。Treat these registers as special temporaries; before beginning, <strong>add them to the graph with their colors</strong></p>
+<pre><code>* Can’t simplify a graph by removing a precolored node
+* Precolored nodes are the starting point of the coloring process
+* Once simplified down to colored nodes start adding back the other nodes as before
+</code></pre><p>Simplify &amp; Coalesce：</p>
+<pre><code>Step 1 (simplify):  simplify as much as possible without removing nodes that are the source or destination of a move (move-related nodes)
+Step 2 (coalesce):  coalesce move-related nodes provided low-degree node results
+Step 3 (freeze):  if neither steps 1 or 2 apply, freeze a move instruction:  registers involved are marked not move-related and try step 1 again
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Compiler/" rel="tag"># Compiler</a>
+          
+            <a href="/tags/编译器/" rel="tag"># 编译器</a>
+          
+            <a href="/tags/SML/" rel="tag"># SML</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/coursera/Algorithms-Part1-Week1-Notes/" rel="next" title="Algorithms Part1 Week1 Notes">
+                <i class="fa fa-chevron-left"></i> Algorithms Part1 Week1 Notes
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Ruida" />
+          <p class="site-author-name" itemprop="name">Ruida</p>
+           
+              <p class="site-description motion-element" itemprop="description">我欲乘风破浪 踏遍黄沙海洋</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xrdcrab" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Background"><span class="nav-number">1.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译器组成结构"><span class="nav-number">2.</span> <span class="nav-text">编译器组成结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Front-end"><span class="nav-number">3.</span> <span class="nav-text">Front-end</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-1-词法分析"><span class="nav-number">3.1.</span> <span class="nav-text">Part 1 词法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-2-句法分析"><span class="nav-number">3.2.</span> <span class="nav-text">Part 2 句法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#上下文无关文法"><span class="nav-number">3.2.1.</span> <span class="nav-text">上下文无关文法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象语法"><span class="nav-number">3.2.2.</span> <span class="nav-text">抽象语法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Middle-end"><span class="nav-number">4.</span> <span class="nav-text">Middle-end</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类型检查"><span class="nav-number">4.1.</span> <span class="nav-text">类型检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AR-活动记录-Activation-Records"><span class="nav-number">4.2.</span> <span class="nav-text">AR 活动记录 Activation Records</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于variable-逃逸："><span class="nav-number">4.2.1.</span> <span class="nav-text">关于variable 逃逸：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于-Stack-Frame-和-Registers："><span class="nav-number">4.2.2.</span> <span class="nav-text">关于 Stack Frame 和 Registers：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于-Static-Link："><span class="nav-number">4.2.3.</span> <span class="nav-text">关于 Static Link：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寄存器"><span class="nav-number">4.2.4.</span> <span class="nav-text">寄存器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#翻译-Translate-to-IR-Tree"><span class="nav-number">4.3.</span> <span class="nav-text">翻译 Translate to IR Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数的Prologue-和Epilogue"><span class="nav-number">4.3.1.</span> <span class="nav-text">函数的Prologue 和Epilogue</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Back-end"><span class="nav-number">5.</span> <span class="nav-text">Back-end</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linearization-and-Canonicalization"><span class="nav-number">5.1.</span> <span class="nav-text">Linearization and Canonicalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Instruction-Selection"><span class="nav-number">5.2.</span> <span class="nav-text">Instruction Selection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Liveness-Analysis"><span class="nav-number">5.3.</span> <span class="nav-text">Liveness Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Control-Flow-Analysis"><span class="nav-number">5.3.1.</span> <span class="nav-text">Control Flow Analysis</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寄存器分配"><span class="nav-number">5.4.</span> <span class="nav-text">寄存器分配</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ruida</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xrdnotes.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://xrdcrab.github.io/2018/Compiler/Compiler编译器/';
+          this.page.identifier = '2018/Compiler/Compiler编译器/';
+          this.page.title = 'Compiler编译器笔记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xrdnotes.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("EFAiuTSbiEfToeNmrabxQ1RL-gzGzoHsz", "xgc25DYeqW3P8xT6Mny1J6s3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>
