@@ -97,7 +97,8 @@
 <meta property="og:description" content="Lecture notes of CMPT442 Compiler Design and Implementation">
 <meta property="og:image" content="https://lh3.googleusercontent.com/-FHAOI-F5dzw/WuTvDJ4ChaI/AAAAAAAAALU/JuMDTKhkQ9UaHXpStPbpXtwCEDEKWh0QgCHMYCw/I/15249528432780.jpg">
 <meta property="og:image" content="https://lh3.googleusercontent.com/-P325gFDAIAY/Wvp8T36pcfI/AAAAAAAAAL4/U2ylmS1C_OQus8xmityWOGpAT_uenqCOwCHMYCw/I/Screen%2BShot%2B2018-05-15%2Bat%2B12.20.45%2BAM.png">
-<meta property="og:updated_time" content="2018-05-16T08:13:02.524Z">
+<meta property="og:image" content="https://lh3.googleusercontent.com/ZsNH7xtiJo-TX3qQ0LNBf8Tx1N-_rO7JESPFJtIHeUft2vyHx8hntUCwjJv-PNVMu-cSYDkFGXqzlukAB54mkV5xTvFkhtgaXzVVE74IKVylRBGzKeJBEDVydEdCSDD_C01LGWIawv1xe-IYBOWQNONnlbP3f-9RVvPWgfPiZ-7vJk3q1cnJQ-ObFX-8Ik7xPxsAPu2Le3sCB3xXVC4YIpIgveGQtweEl92bDPbpdg5QIIN5RoBfJPZ710ENyFc9AJ4QFUKURj_2jv4n-ptDXxPthoNipqe9zSHrafGvmfJCRSL94Tjl_vWdTI-oWZDL1ymgxpvaMx0GbYB9GiTzKCToBairfmgq4BnAiJviDVWnHRRosiLZOXFq5r9xyCvQY4RFUN5f3yfg86m15kP1Y6adKCQggcCYUcnjMGMcxZM4CA8PAlGixHZmyt4Q8-iGLh2K8ftOA_RPV8dj1uRCM2Il3xRCoY22rV2ZyoCwC2qo-7Ts4cpDh7d7g3dpk5-oYeIXp4lnPFAoFFIa4tLYm0fzsUKR8xgRSEoNCyTwIjk9uqps2rns50tWoe4pBI6RbaSnwPZklfHPX0zjZbRKiWfJLwy0kxt7xynz4tc=w964-h682-no">
+<meta property="og:updated_time" content="2018-05-16T08:30:46.904Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Compiler编译器笔记">
 <meta name="twitter:description" content="Lecture notes of CMPT442 Compiler Design and Implementation">
@@ -747,7 +748,8 @@ Step 2 (color):  when the simplified subgraph has been colored, add back the nod
 <pre><code>Step 1 (simplify):  simplify as much as possible without removing nodes that are the source or destination of a move (move-related nodes)
 Step 2 (coalesce):  coalesce move-related nodes provided low-degree node results
 Step 3 (freeze):  if neither steps 1 or 2 apply, freeze a move instruction:  registers involved are marked not move-related and try step 1 again
-</code></pre>
+</code></pre><p>完整的过程如图所示：<br><img src="https://lh3.googleusercontent.com/ZsNH7xtiJo-TX3qQ0LNBf8Tx1N-_rO7JESPFJtIHeUft2vyHx8hntUCwjJv-PNVMu-cSYDkFGXqzlukAB54mkV5xTvFkhtgaXzVVE74IKVylRBGzKeJBEDVydEdCSDD_C01LGWIawv1xe-IYBOWQNONnlbP3f-9RVvPWgfPiZ-7vJk3q1cnJQ-ObFX-8Ik7xPxsAPu2Le3sCB3xXVC4YIpIgveGQtweEl92bDPbpdg5QIIN5RoBfJPZ710ENyFc9AJ4QFUKURj_2jv4n-ptDXxPthoNipqe9zSHrafGvmfJCRSL94Tjl_vWdTI-oWZDL1ymgxpvaMx0GbYB9GiTzKCToBairfmgq4BnAiJviDVWnHRRosiLZOXFq5r9xyCvQY4RFUN5f3yfg86m15kP1Y6adKCQggcCYUcnjMGMcxZM4CA8PAlGixHZmyt4Q8-iGLh2K8ftOA_RPV8dj1uRCM2Il3xRCoY22rV2ZyoCwC2qo-7Ts4cpDh7d7g3dpk5-oYeIXp4lnPFAoFFIa4tLYm0fzsUKR8xgRSEoNCyTwIjk9uqps2rns50tWoe4pBI6RbaSnwPZklfHPX0zjZbRKiWfJLwy0kxt7xynz4tc=w964-h682-no" alt=""></p>
+
       
     </div>
 
