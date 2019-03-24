@@ -97,8 +97,8 @@
 <meta property="og:description" content="Lecture notes of CMPT442 Compiler Design and Implementation">
 <meta property="og:image" content="https://lh3.googleusercontent.com/-FHAOI-F5dzw/WuTvDJ4ChaI/AAAAAAAAALU/JuMDTKhkQ9UaHXpStPbpXtwCEDEKWh0QgCHMYCw/I/15249528432780.jpg">
 <meta property="og:image" content="https://lh3.googleusercontent.com/-P325gFDAIAY/Wvp8T36pcfI/AAAAAAAAAL4/U2ylmS1C_OQus8xmityWOGpAT_uenqCOwCHMYCw/I/Screen%2BShot%2B2018-05-15%2Bat%2B12.20.45%2BAM.png">
-<meta property="og:image" content="https://lh3.googleusercontent.com/ZsNH7xtiJo-TX3qQ0LNBf8Tx1N-_rO7JESPFJtIHeUft2vyHx8hntUCwjJv-PNVMu-cSYDkFGXqzlukAB54mkV5xTvFkhtgaXzVVE74IKVylRBGzKeJBEDVydEdCSDD_C01LGWIawv1xe-IYBOWQNONnlbP3f-9RVvPWgfPiZ-7vJk3q1cnJQ-ObFX-8Ik7xPxsAPu2Le3sCB3xXVC4YIpIgveGQtweEl92bDPbpdg5QIIN5RoBfJPZ710ENyFc9AJ4QFUKURj_2jv4n-ptDXxPthoNipqe9zSHrafGvmfJCRSL94Tjl_vWdTI-oWZDL1ymgxpvaMx0GbYB9GiTzKCToBairfmgq4BnAiJviDVWnHRRosiLZOXFq5r9xyCvQY4RFUN5f3yfg86m15kP1Y6adKCQggcCYUcnjMGMcxZM4CA8PAlGixHZmyt4Q8-iGLh2K8ftOA_RPV8dj1uRCM2Il3xRCoY22rV2ZyoCwC2qo-7Ts4cpDh7d7g3dpk5-oYeIXp4lnPFAoFFIa4tLYm0fzsUKR8xgRSEoNCyTwIjk9uqps2rns50tWoe4pBI6RbaSnwPZklfHPX0zjZbRKiWfJLwy0kxt7xynz4tc=w964-h682-no">
-<meta property="og:updated_time" content="2018-05-16T08:30:46.904Z">
+<meta property="og:image" content="https://xrdcrab.github.io/2018/Compiler/Compiler编译器/compiler.png">
+<meta property="og:updated_time" content="2019-03-24T05:41:45.754Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Compiler编译器笔记">
 <meta name="twitter:description" content="Lecture notes of CMPT442 Compiler Design and Implementation">
@@ -329,7 +329,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-28T15:48:01-06:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-28T17:48:01-04:00">
                 2018-04-28
               </time>
             
@@ -748,7 +748,7 @@ Step 2 (color):  when the simplified subgraph has been colored, add back the nod
 <pre><code>Step 1 (simplify):  simplify as much as possible without removing nodes that are the source or destination of a move (move-related nodes)
 Step 2 (coalesce):  coalesce move-related nodes provided low-degree node results
 Step 3 (freeze):  if neither steps 1 or 2 apply, freeze a move instruction:  registers involved are marked not move-related and try step 1 again
-</code></pre><p>完整的过程如图所示：<br><img src="https://lh3.googleusercontent.com/ZsNH7xtiJo-TX3qQ0LNBf8Tx1N-_rO7JESPFJtIHeUft2vyHx8hntUCwjJv-PNVMu-cSYDkFGXqzlukAB54mkV5xTvFkhtgaXzVVE74IKVylRBGzKeJBEDVydEdCSDD_C01LGWIawv1xe-IYBOWQNONnlbP3f-9RVvPWgfPiZ-7vJk3q1cnJQ-ObFX-8Ik7xPxsAPu2Le3sCB3xXVC4YIpIgveGQtweEl92bDPbpdg5QIIN5RoBfJPZ710ENyFc9AJ4QFUKURj_2jv4n-ptDXxPthoNipqe9zSHrafGvmfJCRSL94Tjl_vWdTI-oWZDL1ymgxpvaMx0GbYB9GiTzKCToBairfmgq4BnAiJviDVWnHRRosiLZOXFq5r9xyCvQY4RFUN5f3yfg86m15kP1Y6adKCQggcCYUcnjMGMcxZM4CA8PAlGixHZmyt4Q8-iGLh2K8ftOA_RPV8dj1uRCM2Il3xRCoY22rV2ZyoCwC2qo-7Ts4cpDh7d7g3dpk5-oYeIXp4lnPFAoFFIa4tLYm0fzsUKR8xgRSEoNCyTwIjk9uqps2rns50tWoe4pBI6RbaSnwPZklfHPX0zjZbRKiWfJLwy0kxt7xynz4tc=w964-h682-no" alt=""></p>
+</code></pre><p>完整的过程如图所示：<br><img src="/2018/Compiler/Compiler编译器/compiler.png" alt="compiler.png" title=""></p>
 
       
     </div>
@@ -804,6 +804,10 @@ Step 3 (freeze):  if neither steps 1 or 2 apply, freeze a move instruction:  reg
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/ARTS/ARTS-Week-1/" rel="prev" title="ARTS Week 1 (03/17/2019 - 03/23/2019)">
+                ARTS Week 1 (03/17/2019 - 03/23/2019) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -882,7 +886,7 @@ Step 3 (freeze):  if neither steps 1 or 2 apply, freeze a move instruction:  reg
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -893,7 +897,7 @@ Step 3 (freeze):  if neither steps 1 or 2 apply, freeze a move instruction:  reg
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -973,7 +977,7 @@ Step 3 (freeze):  if neither steps 1 or 2 apply, freeze a move instruction:  reg
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
