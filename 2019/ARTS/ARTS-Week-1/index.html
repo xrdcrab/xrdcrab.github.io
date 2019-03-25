@@ -89,16 +89,16 @@
 
 
 
-<meta name="description" content="ARTS 打卡第一周">
+<meta name="description" content="ARTS 打卡第一周 高效工作环境 Reverse Integer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ARTS Week 1 (03/17/2019 - 03/23/2019)">
 <meta property="og:url" content="https://xrdcrab.github.io/2019/ARTS/ARTS-Week-1/index.html">
 <meta property="og:site_name" content="Ruida's Notes">
-<meta property="og:description" content="ARTS 打卡第一周">
-<meta property="og:updated_time" content="2019-03-24T05:20:53.050Z">
+<meta property="og:description" content="ARTS 打卡第一周 高效工作环境 Reverse Integer">
+<meta property="og:updated_time" content="2019-03-25T04:14:30.090Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ARTS Week 1 (03/17/2019 - 03/23/2019)">
-<meta name="twitter:description" content="ARTS 打卡第一周">
+<meta name="twitter:description" content="ARTS 打卡第一周 高效工作环境 Reverse Integer">
 
 
 
@@ -394,7 +394,7 @@
 
           
               <div class="post-description">
-                  ARTS 打卡第一周
+                  ARTS 打卡第一周 高效工作环境 Reverse Integer
               </div>
           
 
@@ -410,8 +410,36 @@
 
       
         <blockquote>
-<p>Algorithm: 每周至少做一个 leetcode 的算法题<br>Review: 阅读并点评至少一篇英文技术文章<br>Tip: 学习至少一个技术技巧 </p>
+<p>Algorithm: 每周至少做一个 leetcode 的算法题<br>Review: 阅读并点评至少一篇英文技术文章<br>Tip: 学习至少一个技术技巧<br>Share: 分享一篇有观点和思考的技术文章</p>
 </blockquote>
+<h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><p>找工作的时候按照company tag刷了几十道，后来搁置了好久，现在暂时决定先按顺序用Java刷（工作上用Java多）</p>
+<p>本周做了Reverse Integer：</p>
+<p>题干里说：</p>
+<blockquote>
+<p>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2^31,  2^31 − 1]</p>
+</blockquote>
+<p>刚看到的时候一脸懵。。</p>
+<blockquote>
+<p>2^31 − 1 == 2147483647 == 01111111111111111111111111111111 (31个1) is the maximum positive value for a 32-bit signed binary integer in computing<br>−2^31 == −2147483648 == 1111 1111 1111 1111 1111 11111 1111 1111 （32个1）is the maximum negtive value for a 32-bit signed binary integer in computing</p>
+</blockquote>
+<p>这题很简单，有很多做法，但是我一开始完全没有考虑到overflow的问题，我对这一类知识包括位操作，memory usage，overflow等等都掌握的不好，os方面的知识太欠缺了。</p>
+<h2 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h2><p>TBD 本周oncall，回头更新。暂时先写个wonder list，标记一下想学的东西，排名不分先后。</p>
+<ol>
+<li>OS</li>
+<li>Network</li>
+<li>ML （MLU？）</li>
+<li>AWS </li>
+<li>React</li>
+<li>Guice，Spring</li>
+<li>code complete</li>
+<li>Algorithm （review）</li>
+</ol>
+<h2 id="Tip"><a href="#Tip" class="headerlink" title="Tip"></a>Tip</h2><p>分享几个平时工作上经常用到的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ps -ef | grep java // 查看host上运行的Java</div><div class="line">ps -ef | gerp tomcat // 查看host上运行的tomcat</div><div class="line">ps ax | grep -e &apos;-Xrunjdwp&apos; |tr &apos;&apos; &apos;\n&apos; | grep -e &apos;Xrunjdwp&apos; // 查看host上运行的jdwp</div></pre></td></tr></table></figure>
+<p>用less查看log的时候</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gg // scroll to the top of the log</div><div class="line">shift f or g //scroll to the bottom of the log</div></pre></td></tr></table></figure>
+<h2 id="Share"><a href="#Share" class="headerlink" title="Share"></a>Share</h2><p>分享一篇关于建立高效工作环境的博客，最近总感觉干起活来事倍功半，下个sprint之前找机会设置一下RDE，每次都等着Apollo local deployment太费时间了</p>
+<p><a href="www.rayjun.cn/2019/03/18/如何打造一个高效的工作环境/">打造高效工作环境</a></p>
 
       
     </div>
@@ -510,8 +538,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -584,6 +621,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Review"><span class="nav-number">2.</span> <span class="nav-text">Review</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tip"><span class="nav-number">3.</span> <span class="nav-text">Tip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Share"><span class="nav-number">4.</span> <span class="nav-text">Share</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
